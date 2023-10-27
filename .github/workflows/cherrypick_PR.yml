@@ -1,4 +1,4 @@
-name: Cherry-Pick and Raise PR
+name: Cherry-Pick Commits
 on:
   push:
     branches:
