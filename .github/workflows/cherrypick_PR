@@ -1,0 +1,19 @@
+name: Cherry-Pick and Raise PR
+on:
+  push:
+    branches:
+      - main
+jobs:
+  cherry-pick-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+       - name: Cherry-Pick Commits
+          run: |
+            if [[ ${{ github.event.head_commit.message }} == *"[cherrypick]"* ]]; then
+              # Cherry-pick the commit
+              git cherry-pick -x ${{ github.event.head_commit.sha }}
+            fi
+          if: startsWith(github.event.head_ref, 'refs/heads/feature/')
