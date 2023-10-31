@@ -23,7 +23,7 @@ jobs:
         run: |
           # Define your source and target S3 bucket paths
           SOURCE_BUCKET="s3://ghtestworkflow/pipeline.PNG"
-          TARGET_BUCKET="ss3://ghworkflow1/"
+          TARGET_BUCKET="s3://ghworkflow1/foldertest/"
 
           # Use AWS CLI to copy files from source to target
           aws s3 cp $SOURCE_BUCKET $TARGET_BUCKET --recursive
