@@ -15,7 +15,7 @@ jobs:
 
     - name: Read JSON file
       run: |
-        json_data=$(cat path/to/your/json/file.json)
+        json_data=$(cat input/input.json)
         echo "::set-output name=json_data::$json_data"
 
     - name: Extract values from JSON
