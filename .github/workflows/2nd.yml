@@ -1,0 +1,10 @@
+name: 2nd Workflow
+on: workflow_dispatch
+jobs: 
+  first-job:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: print greeting
+        run: |
+          echo " GITHUB ACTIONS " 
+          echo " Good Bye" 

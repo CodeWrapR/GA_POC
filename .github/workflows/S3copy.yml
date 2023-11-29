@@ -1,0 +1,29 @@
+name: Copy Files between S3 Buckets
+
+on:
+  workflow_dispatch:
+  
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 
+
+      - name: Copy Files
+        run: |
+          # Define your source and target S3 bucket paths
+          SOURCE_BUCKET="s3://ghtestworkflow/pipeline.PNG"
+          TARGET_BUCKET="s3://ghworkflow1/foldertest/"
+
+          # Use AWS CLI to copy files from source to target
+          aws s3 cp $SOURCE_BUCKET $TARGET_BUCKET --recursive

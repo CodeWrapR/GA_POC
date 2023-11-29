@@ -1,0 +1,35 @@
+name: Extract JSON Values
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  extract-values:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Read JSON file
+      run: |
+        json_data=$(cat input/input.json)
+        echo "::set-output name=json_data::$json_data"
+
+    - name: Extract values from JSON
+      id: extract
+      run: |
+        name=$(echo "$json_data" | jq -r '.name')
+        age=$(echo "$json_data" | jq -r '.age')
+        car=$(echo "$json_data" | jq -r '.car')
+        echo "::set-output name=name::$name"
+        echo "::set-output name=age::$age"
+        echo "::set-output name=car::$car"
+
+    - name: Display extracted values
+      run: |
+        echo "Name: ${{ steps.extract.outputs.name }}"
+        echo "Age: ${{ steps.extract.outputs.age }}"
+        echo "Car: ${{ steps.extract.outputs.car }}"
